@@ -5,6 +5,7 @@
 - [Требования к оформлению PR](https://github.com/abak-press/guides/tree/master/code-review#Требования-к-оформлению-pr)
 - [Требования к принятию PR](https://github.com/abak-press/guides/tree/master/code-review#Требования-к-принятию-pr)
 - [Требования к разрабатываемым гемам](https://github.com/abak-press/guides/tree/master/gems)
+- [Версионирование компонентов](https://github.com/abak-press/guides/tree/master/versioning)
 - [Непрерывная интеграция](https://github.com/abak-press/guides/tree/master/ci)
 - [Модификаторы доступа к методам в Ruby](http://mikepackdev.com/blog_posts/43-don-t-use-protected-methods-in-ruby)
 
