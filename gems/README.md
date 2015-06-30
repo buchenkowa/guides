@@ -55,7 +55,7 @@
   Пример: apress-amazon_assets
   
 - Гем должен иметь changelog.  
-  Пример: https://github.com/abak-press/redis_counters/blob/master/CHANGELOG
+  Пример: https://github.com/abak-press/apress-products/blob/master/CHANGELOG.md
   
 - Все релизы гема должны быть помечены тегом.
 
