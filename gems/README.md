@@ -51,9 +51,6 @@
 
 - Релиз гема может выпускать любой, у кого есть права на push.
 
-- Гем должен иметь rake-задачи по автоматизированному выпуску релиза.  
-  Пример: apress-amazon_assets
-  
 - Гем должен иметь changelog.  
   Пример: https://github.com/abak-press/apress-products/blob/master/CHANGELOG.md
   
