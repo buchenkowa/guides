@@ -8,5 +8,5 @@
 - [Непрерывная интеграция](https://github.com/abak-press/guides/tree/master/ci)
 - [Модификаторы доступа к методам в Ruby](http://mikepackdev.com/blog_posts/43-don-t-use-protected-methods-in-ruby)
 
-В большинстве вопросов мы принимаем правила описанные в гайде:
+По большинству вопросов мы принимаем правила описанные в гайде:
 https://github.com/thoughtbot/guides
