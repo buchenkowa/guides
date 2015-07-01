@@ -7,6 +7,8 @@
 - [Требования к разрабатываемым гемам](https://github.com/abak-press/guides/tree/master/gems)
 - [Версионирование компонентов](https://github.com/abak-press/guides/tree/master/versioning)
 - [Непрерывная интеграция](https://github.com/abak-press/guides/tree/master/ci)
+- [Сервис поиска по исходным кодам](https://github.com/abak-press/guides/tree/master/services#Сервис-поиска-по-исходным-кодам)
+- [Развертывание](https://github.com/abak-press/guides/tree/master/services#Развертывание)
 - [Модификаторы доступа к методам в Ruby](http://mikepackdev.com/blog_posts/43-don-t-use-protected-methods-in-ruby)
 
 По большинству вопросов мы принимаем правила описанные в гайде:
