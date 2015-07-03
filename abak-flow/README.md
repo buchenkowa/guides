@@ -123,3 +123,7 @@ TASK-001
 
 
 Последней строкой обязательно указывается номер закрываемого (закрываемых) тасков из JIRA или тикетов с Github, если она есть конечно.
+
+http://seesparkbox.com/foundry/semantic_commit_messages  
+http://tbaggery.com/2008/04/19/a-note-about-git-commit-messages.html  
+https://github.com/abak-press/apress_product_loader/pull/23
