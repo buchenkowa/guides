@@ -10,6 +10,8 @@
 - [Сервис поиска по исходным кодам](https://github.com/abak-press/guides/tree/master/services#Сервис-поиска-по-исходным-кодам)
 - [Развертывание](https://github.com/abak-press/guides/tree/master/services#Развертывание)
 - [Модификаторы доступа к методам в Ruby](http://mikepackdev.com/blog_posts/43-don-t-use-protected-methods-in-ruby)
+- [The Twelve-Factor App](http://12factor.net/ru/)
+- [Полезные ресурсы и блоги](https://github.com/abak-press/guides/blob/master/docs/BLOGS.MD)
 
 По большинству вопросов мы принимаем правила описанные в гайде:
 https://github.com/thoughtbot/guides
