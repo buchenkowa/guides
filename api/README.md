@@ -3,7 +3,9 @@
 На Клиенте и на Сервере есть одинаковый секретный ключ, которые они не передают по сети.
 С этого ключа Клиент подписывает свой запрос, а Сервер проверяет эту подпись.
 Клиент передаёт на Сервер только свой access_id. 
-На Сервере хранится таблица соответствий access_id => secret_key.
+На Сервере хранится таблица соответствий access_id => secret_token.
+
+http://www.thebuzzmedia.com/designing-a-secure-rest-api-without-oauth-authentication/
 
 ## Модульность
 Каждое специфичное API будет частью гема, реализующего эту функциональность.
@@ -25,10 +27,10 @@
 `http://www.krepika.ru/api/v22/products` -> `http://www.krepika.ru/api/v1/products` (т.к. посл. доступная v1)
 
 ## Возможности
-- Авторизация с помощью access_id (HMAC)
+- Авторизация с помощью access_id/secret_token (HMAC)
 - Авторизация с помощью session_id (будучи авторизованным на портале)
-- Через логин, пароль и device_id получить secure_key, access_id и auth_key
-- Через auth_key получить secure_key и access_id
+- Через логин, пароль и device_id получить secret_token, access_id и refresh_token
+- Через access_id/refresh_token получить secret_token и refresh_token
 
 Авторизация через session_id не рекомендуется к использованию и сделана для плавного перехода мобильного приложения на новое API и для обеспечения работы через API JavaScript приложений (например ЕТИ)
 
@@ -59,46 +61,42 @@ id - integer
 name - string
 device_id - string
 access_id - string
-secure_key - string
-secure_key_expire_at - datetime
-auth_key - string
-auth_key_expire_at - datetime
+secret_token - string
+secret_token_expire_at - datetime
+refresh_token - string
+refresh_token_expire_at - datetime
 created_at - datetime
 updated_at - datetime
 
 ### Rails
 
-#### Apress::Api::BaseController < ActionController::Base или ActionController::Metal
-- `#authenticate`
+#### Apress::Api::BaseController < ActionController::Metal
+- `before_filter #authenticate`
   - берем из заголовков `Authorization` (желательно брать из параметров, для легкой работы через браузер и curl)
   - в качестве значения заголовка приходит "access_id:signature".
-  - Ищем secure_key в таблице api_clients и проверяем signature.
+  - Ищем secret_token в таблице api_clients и проверяем signature.
   - Всю эту работу выполняет гем [api-auth](https://github.com/mgomes/api_auth)
-- остальная различная специфика типа server_error, not_found, forbidden
+
+#### Apress::Api::TokensController < BaseController
+- `#update`
+  - PUT /api/clients/:access_id/tokens/:refresh_token
+  - обновление refresh_token и secret_token
 
 ### Dependencies 
 api-auth, jbuilder
 
 
 ## Gem `apress-api-application`
-Всё логика прекрасно подходит до того момента, пока мы контролируем доступ к Клиенту.
-Как только этот контроль теряется, то проблема хранения secure_key всплывает на первое место.
-Такими клиентами являются мобильные приложения. 
-Юзер не может вводить в качестве логина строку из 128 символов =).
+Предлагается следующая схема.
+Юзер в мобилке вводит логин/пароль, которые отправляются на Сервер (желательно по SSL, чтобы не светить secret_token). Вместе с этими данными передается device_id - идентификатор устройства.
+Сервер находит User, находит соотв. запись в таблице api_clients, по user_id и device_id, если записи нет, то создает. В ответ возвращает access_id, secret_token, refresh_token и доп. информацию, если нужно.
 
-Предлагается следующая, не идеальная схема. (идеальная схему можно прочитать [вот здесь](http://www.thebuzzmedia.com/designing-a-secure-rest-api-without-oauth-authentication/), 
-искать по слову Twitter).
-Юзер в мобилке вводит логин/пароль, которые отправляются на Сервер (желательно по SSL, чтобы не светить secure_key). Вместе с этими данными передается device_id - идентификатор устройства.
-Сервер находит User, находит соотв. запись в таблице api_clients, по user_id и device_id, если записи нет, то создает. В ответ возвращает access_id, secure_key, auth_key и доп. информацию, если нужно.
+*secret_token* - это секретный ключ, известный только клиенту и серверу, с помощью него подписывается запрос. Время жизни ограничено 1 час.
 
-*secure_key* - это секретный ключ, известный только клиенту и серверу, с помощью него подписывается запрос. Время жизни ограничено минутами.
-
-*device_id* - является не обязательным, если он не указан используется дефолт - 0.
+*device_id* - является не обязательным
 Этот идентификатор нужен, для разделения авторизационных реквизитов между несколькими устройствами одного пользователя.
 
-*auth_key* - это авторизационный ключ. Существует для того, что бы клиенты не хранили логин и пароль пользователя, а вместо этого авторизовывались через auth_key. Время жизни ограничено днями?!
-
-Ключ регенерируется при каждой авторизации через hello, как по связке login/password/device_id, так и через auth_key.
+*refresh_token* - это авторизационный ключ для получения нового secret_token. Существует для того, что бы клиенты не хранили логин и пароль пользователя. Время жизни ограничено 1 неделя.
 
 Также этот гем авторизует пользователя. Т.е. есть аутентификация, а есть авторизация.
 Авторизация - это определение роли пользователя и его доступных прав.
@@ -111,19 +109,17 @@ api-auth, jbuilder
 
 ### Rails
 
-### Apress::Api::Application::Extensions::Apress::Api::BaseController
-- `#hello`
-  - В идеале должен находится на отдельном SSL домене, типо `auth.pulscen.ru`
-  - Сюда приходят логин/пароль/device_id ИЛИ auth_key
-  - Ведётся поиск по таблице api_users, по user_id/device_id ИЛИ по auth_key
+### Apress::Api::Application::ClientsController
+- `#create`
+  - В идеале должен находится на отдельном SSL домене. POST `login.pulscen.ru/api/clients`
+  - Сюда приходят логин/пароль/device_id
+  - Ведётся поиск по таблице api_users, по user_id/device_id
   - Если записи нет, то создаётся новая
-  - ВСЕГДА генерируется/регенерируется secure_key, auth_key
-  - При авторизации через auth_key сервер проверяет не протух ли он, если протух, не авторизует, возвращает спец код ответа
-  - Возвращает клиенту access_id
-  - Возвращает клиенту secure_key
-  - Возвращает клиенту auth_key
-  - Возвращается клиенту служебную информацию
-- `#authenticate`
+  - Регенерируется secret_token, refresh_token
+  - Возвращает клиенту access_id, secret_token, secret_token_expire_at, refresh_token, refresh_token_expire_at
+
+### Apress::Api::Application::Extensions::Apress::Api::BaseController
+- `before_filter #authenticate`
   - если пришёл заголовок с сессией, то авторизуем обычным способом через authlogic
   - иначе
   - super (авторизация по HMAC)
@@ -132,24 +128,20 @@ api-auth, jbuilder
 
 Т.е. при работе с каждым экшеном API будет возможность авторизации через access_id и session_id.
 
-Экшн *hello* должен так же версионироваться.
-
 ### Dependencies 
 apress-api, apress-clearance, apress-application
 
 # Общая схема работы
-- ЕСЛИ **есть access_id**, ТО: (1)
-  - запрашиваю любые урлы API, в заголовках передаю access_id, sign
-  - слежу за протуханием secure_key, при протухании, работаю по п. 2 или п. 3
-- ИНАЧЕ ЕСЛИ **нет access_id и есть auth_key**, ТО: (2)
-  - авторизуюсь через hello, в заголовке передаю auth_key:
-    - ЕСЛИ токен не протух, ТО: получаю access_id, secure_key и auth_key (сервер всегда обновляет их), работаю по п. 1
-    - ЕСЛИ токен протух (получен спец ответ), ТО: работаю по п. 3
-- ИНАЧЕ ЕСЛИ **нет access_id, нет auth_key или он протух**, ТО: (3)
-  - авторизуюсь через hello, в заголовке передаю login/password/device_id
-  - получаю access_id, secure_key и auth_key
-  - работаю по п.1
-- ИНАЧЕ ЕСЛИ **нет access_id, нет auth_key, нет логина и пароля, НО есть авторизация на портале и кука с сессией** (Javascript), ТО: (4)
+- ЕСЛИ **есть access_id и secret_token**, ТО:
+  - запрашиваю любые урлы API, в заголовках передаю access_id, подписываю все запросы secret_token'ом
+  - слежу за протуханием secret_token
+- ЕСЛИ **secret_token** протух, ТО:
+  - обновляю токены через PUT /api/clients/:access_id/tokens/:refresh_token (TokensController#update)
+- ЕСЛИ **refresh_token** протух, ТО:
+  - авторизуюсь через POST /api/api_clients (ClientsController#create), передаю login, password, device_id
+  - в ответ возвращаются access_id, secret_token, secret_token_expire_at, refresh_token, refresh_token_expire_at
+- ЕСЛИ **есть кука с сессией**, ТО:
+  - то я javascript
   - запрашиваю любые урлы API, в куке передаю ид сессии.
 
 # Дополнительно
@@ -157,7 +149,7 @@ apress-api, apress-clearance, apress-application
 - отпределять мобайл роль по юзер агенту
 - маршруты должны жить на текущем домене (на всех компанейских + портальных)
 - в хелло можно добавить служ. инфу, время жизни токена, доступные версии и т.д
-- при логауте, нужно экспаирить secure_key и auth_key
+- при логауте, нужно экспаирить secret_token и refresh_token
 
 # Перевод на новое API мобильного приложения
 Какое-то время мобильному приложению придется работать с двуми API параллельно. Новый функционал будем реализовывать в новом API, старый будет доживать в старом. Постепенно, старое API удалим.
