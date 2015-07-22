@@ -13,6 +13,7 @@
 - [Методы отладки кода](https://github.com/abak-press/guides/blob/master/best-practices/debug/README.md#Методы-отладки-кода)
 - [Модификаторы доступа к методам в Ruby](http://mikepackdev.com/blog_posts/43-don-t-use-protected-methods-in-ruby)
 - [The Twelve-Factor App](http://12factor.net/ru/)
+- [Рекомендации по написанию RSpec - тестов](http://betterspecs.org/ru/)
 
 По большинству вопросов мы принимаем правила описанные в гайде:
 https://github.com/thoughtbot/guides
