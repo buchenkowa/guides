@@ -12,19 +12,19 @@ http://www.thebuzzmedia.com/designing-a-secure-rest-api-without-oauth-authentica
 Каждый гем содержит документацию к API в редейме или доп. документе.
 
 ## Версионирование
-Предлагается применить сквозное версионирование API.
+Предлагается применить погемовое версионирование API.
 При работе с API в урле обязательно указывается версия.
 Маршруты и права конкретного API будут располагаться в конкретном геме.
-В каждом геме, на ряду с конкретными маршрутами описывающими конкретные версии, должен быть универсальный маршрут для любой версии и для версии `edge`, указывающий на крайнюю версию API. Это необходимо для легкого выпуска новой версии API, что бы не нужно было менять все гемы. Если указанная версия не реализована в конкретном API, то будет использована крайняя версия.
+В каждом геме, на ряду с конкретными маршрутами описывающими конкретные версии, будет возможность вызвать ресуср без указании версии, в таком случае будет использована последняя версия гемового апи.
 
-Устаревшие версии будут закрываться, а клиенту при запросе будет возвращаться специальный код. Это реализуется в маршрутах, с помощью обработки всех экшинов устаревшей версии, с помощью спец контроллера.
+Устаревшие версии будут закрываться, а клиенту при запросе будет возвращаться специальный код `410`. Это реализуется в маршрутах, с помощью обработки всех экшинов устаревшей версии, с помощью спец контроллера `Apress::Api::DeprecatedVersionsController`.
 
 пример урла:
-`http://www.pulscen.ru/api/v1/products`
+`http://www.pulscen.ru/api/v2/products`
 `http://ekb.pulscen.ru/api/v1/products`
-`http://krepika.pulscen.ru/api/v1/products`
+`http://krepika.pulscen.ru/api/v2/products`
 `http://www.krepika.ru/api/v1/products`
-`http://www.krepika.ru/api/v22/products` -> `http://www.krepika.ru/api/v1/products` (т.к. посл. доступная v1)
+`http://www.krepika.ru/api/products` -> `http://www.krepika.ru/api/v2/products` (т.к. посл. v2)
 
 ## Возможности
 - Авторизация с помощью access_id/secret_token (HMAC)
@@ -36,6 +36,20 @@ http://www.thebuzzmedia.com/designing-a-secure-rest-api-without-oauth-authentica
 
 ## Формат ответа
 - Ответ формируется в формате JSON
+- В ответе должен всегда присутствовать root элемент. примеры:
+```json
+{
+  rubric: {id: 123}
+}
+
+{
+  rubrics: [
+    {id: 123},
+    {id: 124}
+  ]
+}
+```
+- постраничная наваигация должна возвращаться в заголовках ответа `X-Total-Count X-Total-Pages`
 - Проверять формат запроса:
   - если запрос XHR, то отдавать всегда 200
   - если запрос не XHR, то отдавать соотв. результату код
@@ -73,14 +87,24 @@ updated_at - datetime
 #### Apress::Api::BaseController < ActionController::Metal
 - `before_filter #authenticate`
   - берем из заголовков `Authorization` (желательно брать из параметров, для легкой работы через браузер и curl)
-  - в качестве значения заголовка приходит "access_id:signature".
+  - пример заголовка: `Authorization = APIAuth 'client access id':'signature'`
   - Ищем secret_token в таблице api_clients и проверяем signature.
-  - Всю эту работу выполняет гем [api-auth](https://github.com/mgomes/api_auth)
+  - Всю эту работу выполняет гем [api-auth](https://github.com/mgomes/api_auth), все подробности подписания читать там
 
 #### Apress::Api::TokensController < BaseController
-- `#update`
-  - PUT /api/clients/:access_id/tokens/:refresh_token
+- `#create`
+  - POST /api/v1/clients/:access_id/tokens/?refresh_token=
   - обновление refresh_token и secret_token
+  - коды ответа: 404 - клиент не найден, 400 - токен не найден, 403 - токен протух
+  - формат ответа:
+  ```json
+  {
+    client: {
+      id:, access_id:, device_id:, secret_token_expire_at:, refresh_token_expire_at:, user_agent:,
+      updated_at:, created_at:, secret_token:, refresh_token:
+    }
+  }
+  ```
 
 ### Dependencies 
 api-auth, jbuilder
@@ -111,8 +135,8 @@ api-auth, jbuilder
 
 ### Apress::Api::Application::ClientsController
 - `#create`
-  - В идеале должен находится на отдельном SSL домене. POST `login.pulscen.ru/api/clients`
-  - Сюда приходят логин/пароль/device_id
+  - В идеале должен находится на отдельном SSL домене. POST `login.pulscen.ru/api/v1/clients`
+  - Сюда приходят `{session: {login: "", password: "", device_id: ""}}`
   - Ведётся поиск по таблице api_users, по user_id/device_id
   - Если записи нет, то создаётся новая
   - Регенерируется secret_token, refresh_token
@@ -136,9 +160,9 @@ apress-api, apress-clearance, apress-application
   - запрашиваю любые урлы API, в заголовках передаю access_id, подписываю все запросы secret_token'ом
   - слежу за протуханием secret_token
 - ЕСЛИ **secret_token** протух, ТО:
-  - обновляю токены через PUT /api/clients/:access_id/tokens/:refresh_token (TokensController#update)
+  - обновляю токены через POST /api/v1/clients/:access_id/tokens/?refresh_token=
 - ЕСЛИ **refresh_token** протух, ТО:
-  - авторизуюсь через POST /api/api_clients (ClientsController#create), передаю login, password, device_id
+  - авторизуюсь через POST /api/v1/clients (ClientsController#create), передаю login, password, device_id
   - в ответ возвращаются access_id, secret_token, secret_token_expire_at, refresh_token, refresh_token_expire_at
 - ЕСЛИ **есть кука с сессией**, ТО:
   - то я javascript
@@ -148,7 +172,6 @@ apress-api, apress-clearance, apress-application
 - отказаться от драппера в пользу джейбилдера
 - отпределять мобайл роль по юзер агенту
 - маршруты должны жить на текущем домене (на всех компанейских + портальных)
-- в хелло можно добавить служ. инфу, время жизни токена, доступные версии и т.д
 - при логауте, нужно экспаирить secret_token и refresh_token
 
 # Перевод на новое API мобильного приложения
