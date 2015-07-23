@@ -72,13 +72,13 @@ http://www.thebuzzmedia.com/designing-a-secure-rest-api-without-oauth-authentica
 *api_clients*
 
 id - integer
-name - string
 device_id - string
 access_id - string
 secret_token - string
 secret_token_expire_at - datetime
 refresh_token - string
 refresh_token_expire_at - datetime
+user_agent - string
 created_at - datetime
 updated_at - datetime
 
