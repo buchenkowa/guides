@@ -7,6 +7,7 @@
 - [Требования к разрабатываемым гемам](https://github.com/abak-press/guides/tree/master/gems)
 - [Версионирование компонентов](https://github.com/abak-press/guides/tree/master/versioning)
 - [Требования к разработке БД](https://github.com/abak-press/guides/blob/master/database/README.md#Требования-к-разработке-БД)
+- [Требования к разработке отчетов](https://github.com/abak-press/guides/blob/master/docs/starter-kit/reports.md)
 - [Непрерывная интеграция](https://github.com/abak-press/guides/tree/master/ci)
 - [Сервис поиска по исходным кодам](https://github.com/abak-press/guides/tree/master/services#Сервис-поиска-по-исходным-кодам)
 - [Развертывание](https://github.com/abak-press/guides/tree/master/services#Развертывание)
