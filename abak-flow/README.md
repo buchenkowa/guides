@@ -106,9 +106,7 @@ TASK-001
 
 **На русском:**
 
-`исправление ошибки NoMethodError в RemoteReader'е`
-
-Первое слово - отглагольное существительное.
+`исправит ошибки NoMethodError в RemoteReader'е`
 
 Не нужно писать в сообщении номер таска из Джиры или тикета с Гитхаба - для этого есть тело коммита (см. далее).
 
@@ -118,7 +116,7 @@ TASK-001
 
 `docs(all): provide README.md with "Commit messages" section`
 
-`style(csv): исправление форматирования в bin/csv2json`
+`style(csv): исправит форматирование в bin/csv2json`
 
 ### Тело
 Заполнение тела коммита опционально. Нужно в том случае, если описание решенной проблемы достаточно сложно и не может уместиться в строку заголовка.Тело сообщения отделяется от заголовка одной пустой строкой и заполняется произвольно.
@@ -126,6 +124,7 @@ TASK-001
 
 Последней строкой обязательно указывается номер закрываемого (закрываемых) тасков из JIRA или тикетов с Github, если она есть конечно.
 
+http://chris.beams.io/posts/git-commit/
 http://seesparkbox.com/foundry/semantic_commit_messages  
 http://tbaggery.com/2008/04/19/a-note-about-git-commit-messages.html  
 https://github.com/abak-press/apress_product_loader/pull/23
