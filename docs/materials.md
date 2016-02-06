@@ -7,4 +7,8 @@
 [Лекции Технопарка. Проектирование высоконагруженных систем](http://habrahabr.ru/company/mailru/blog/254843/)  
 [Лекции Техносферы. Методы обеспечения качества и тестирования web-приложений](http://habrahabr.ru/company/mailru/blog/260105/)    
 
-[Руководство по REST API](http://www.restapitutorial.ru/)  
+[Руководство по REST API](http://www.restapitutorial.ru/)
+
+[Создание архитектуры программы или как проектировать табуретку](https://habrahabr.ru/post/276593/)    
+[Немного об архитектурах программного обеспечения](https://habrahabr.ru/company/it-grad/blog/276297/)    
+
