@@ -1,5 +1,12 @@
 # Руководства
 
+> Some software engineering rules:
+
+> No code runs faster than no code.  
+> No code has fewer bugs than no code.  
+> No code uses less memory than no code.  
+> No code is easier to understand than no code.
+
 - [Работа с исходным кодом и репозиторием проекта](https://github.com/abak-press/guides/tree/master/abak-flow)
 - [Оформление кода](https://github.com/abak-press/guides/tree/master/style)
 - [Требования к оформлению PR](https://github.com/abak-press/guides/tree/master/code-review#Требования-к-оформлению-pr)
