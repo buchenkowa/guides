@@ -3,6 +3,7 @@
 Раздел содержит т.н. tips & tricks & best practices по отладке кода Ruby в частности Rails-приложений и тестов Rspec.
 
 ## Литература и вспомогательные ссылки
+- [I am a puts debuggerer](https://tenderlovemaking.com/2016/02/05/i-am-a-puts-debuggerer.html)
 - [Wiki по инструменту Pry](https://github.com/pry/pry/wiki)
 - [Pry screencast](https://vimeo.com/26391171)
 - [Документация по pry-debugger'у](https://github.com/nixme/pry-debugger/blob/master/README.md)
