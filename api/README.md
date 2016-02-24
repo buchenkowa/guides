@@ -175,4 +175,5 @@ apress-api, apress-clearance, apress-application
 Какое-то время мобильному приложению придется работать с двуми API параллельно. Новый функционал будем реализовывать в новом API, старый будет доживать в старом. Постепенно, старое API удалим.
 
 # Дополнительные ресурсы
-[Изучаем REST: Руководство по созданию RESTful сервиса](http://www.restapitutorial.ru/)  
+[Изучаем REST: Руководство по созданию RESTful сервиса](http://www.restapitutorial.ru/)   
+[JSON API](http://jsonapi.org/)
