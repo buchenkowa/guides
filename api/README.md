@@ -203,4 +203,5 @@ apress-api, apress-clearance, apress-application
 # Дополнительные ресурсы
 [Изучаем REST: Руководство по созданию RESTful сервиса](http://www.restapitutorial.ru/)   
 [JSON API](http://jsonapi.org/)  
-[GitHub API](https://developer.github.com/v3/)
+[GitHub API](https://developer.github.com/v3/)  
+[Hypermedia REST API](https://habrahabr.ru/company/aligntechnology/blog/281206/)   
