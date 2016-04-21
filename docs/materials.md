@@ -16,4 +16,5 @@
 [Объясняя необъяснимое 1](https://habrahabr.ru/post/275851/)  
 [Объясняя необъяснимое 2](https://habrahabr.ru/post/276973/)  
 [Объясняя необъяснимое 3](https://habrahabr.ru/post/279255/)  
-[Объясняя необъяснимое 4](https://habrahabr.ru/post/281036/)  
+[Объясняя необъяснимое 4](https://habrahabr.ru/post/281036/)    
+[Объясняя необъяснимое 5](https://habrahabr.ru/post/282011/)  
