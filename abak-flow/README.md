@@ -112,7 +112,7 @@ TASK-001
 
 Например:
 
-`fix(lynx): fix NoMethodError in RemoteReader`
+`fix(lynx): NoMethodError in RemoteReader`
 
 `docs(all): provide README.md with "Commit messages" section`
 
