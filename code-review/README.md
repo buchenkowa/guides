@@ -44,4 +44,5 @@
 В большинстве вопросов мы принимаем правила описанные в гайде: https://github.com/thoughtbot/guides/tree/master/code-review
 
 Полезные ссылки  
-[Как писать отличные пулл-реквесты](http://habrahabr.ru/post/248527/)
+[Как писать отличные пулл-реквесты](http://habrahabr.ru/post/248527/)  
+[Как создать идеальный Pull Request](https://habrahabr.ru/company/Voximplant/blog/279703/)   
