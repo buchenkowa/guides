@@ -8,8 +8,8 @@ http://tmm1.net
 http://weblog.rubyonrails.org  
 http://www.rubyinside.com  
 http://rubyflow.ru  
-http://rubyflow.com  
-http://code.tutsplus.com/categories/ruby-on-rails
+http://rubyflow.com     
+http://code.tutsplus.com/categories/ruby-on-rails   
 http://www.depesz.com  
 http://github.com/blog  
 http://habrahabr.ru  
