@@ -18,3 +18,11 @@
 [Объясняя необъяснимое 3](https://habrahabr.ru/post/279255/)  
 [Объясняя необъяснимое 4](https://habrahabr.ru/post/281036/)    
 [Объясняя необъяснимое 5](https://habrahabr.ru/post/282011/)  
+
+## Ruby/Rails AntiPatterns Basics
+[Models](http://code.tutsplus.com/articles/antipatterns-basics-rails-models--cms-25636)     
+[Controllers](http://code.tutsplus.com/articles/antipatterns-basics-rails-controllers--cms-25900)     
+[Tests](http://code.tutsplus.com/articles/antipatterns-basics-rails-tests--cms-26011)    
+[Views](http://code.tutsplus.com/articles/antipatterns-basics-rails-views--cms-25670)    
+
+[Ruby/Rails Code Smell Basics](http://code.tutsplus.com/series/ruby-rails-code-smell-basics--cms-960)       
