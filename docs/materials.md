@@ -10,7 +10,10 @@
 [Руководство по REST API](http://www.restapitutorial.ru/)
 
 [Создание архитектуры программы или как проектировать табуретку](https://habrahabr.ru/post/276593/)    
-[Немного об архитектурах программного обеспечения](https://habrahabr.ru/company/it-grad/blog/276297/)    
+[Немного об архитектурах программного обеспечения](https://habrahabr.ru/company/it-grad/blog/276297/)  
+
+## Ruby
+[Ruby Tricks, Idiomatic Ruby, Refactorings and Best Practices](https://github.com/franzejr/best-ruby)     
 
 ## Оптимизация запросов PG
 [Объясняя необъяснимое 1](https://habrahabr.ru/post/275851/)  
