@@ -26,3 +26,4 @@ http://devdocs.io
 http://events.yandex.ru  
 http://2014.pgday.ru/ru/materials  
 http://pgday.ru/ru  
+http://blog.arkency.com/
