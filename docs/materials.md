@@ -13,7 +13,10 @@
 [Немного об архитектурах программного обеспечения](https://habrahabr.ru/company/it-grad/blog/276297/)  
 
 ## Ruby
-[Ruby Tricks, Idiomatic Ruby, Refactorings and Best Practices](https://github.com/franzejr/best-ruby)     
+[Ruby Tricks, Idiomatic Ruby, Refactorings and Best Practices](https://github.com/franzejr/best-ruby)  
+
+## PostgreSQL
+[Официальная документация на русском языке](https://postgrespro.ru/docs)  
 
 ## Оптимизация запросов PG
 [Объясняя необъяснимое 1](https://habrahabr.ru/post/275851/)  
