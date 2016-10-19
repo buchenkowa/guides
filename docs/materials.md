@@ -34,4 +34,5 @@
 [Ruby/Rails Code Smell Basics](http://code.tutsplus.com/series/ruby-rails-code-smell-basics--cms-960)   
 
 [ПАРУ СЛОВ ПРО ИНТЕРАКТОРЫ В RAILS](https://mkdev.me/posts/paru-slov-pro-interaktory-v-rails)          
+[Are service objects enough?](http://blog.ragnarson.com/2016/10/19/are-service-objects-enough.html)          
 
