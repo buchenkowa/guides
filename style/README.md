@@ -6,9 +6,13 @@
 
 Он автоматически проверяет отправленные PR.
 
-[Рабочий Ruby style guide](http://hound.railsc.ru/style_guides/ruby.yml)
+[Рабочий Ruby style guide](http://hound.railsc.ru/style_guides/rubocop.yml)
 
 [Рабочий JavaScript style guide](http://hound.railsc.ru/style_guides/javascript.json)
+
+[Рабочий SCSS style guide](http://hound.railsc.ru/style_guides/scss.yml)
+
+[Рабочий Haml style guide](http://hound.railsc.ru/style_guides/haml.yml)
 
 [Hound. Записки эксплуататора](https://conf.railsc.ru/pages/viewpage.action?pageId=25264403)
 
