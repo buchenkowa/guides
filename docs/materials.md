@@ -18,6 +18,10 @@
 ## PostgreSQL
 [Официальная документация на русском языке](https://postgrespro.ru/docs)  
 
+## Databases
+[19 Online Resources for Learning About Database Design Errors](http://www.vertabelo.com/blog/notes-from-the-lab/19-online-resources-for-learning-about-database-design-errors) 
+
+
 ## Оптимизация запросов PG
 [Объясняя необъяснимое 1](https://habrahabr.ru/post/275851/)  
 [Объясняя необъяснимое 2](https://habrahabr.ru/post/276973/)  
