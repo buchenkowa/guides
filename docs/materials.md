@@ -14,6 +14,7 @@
 
 ## Ruby
 [Ruby Tricks, Idiomatic Ruby, Refactorings and Best Practices](https://github.com/franzejr/best-ruby)  
+[Ruby Debugging Magic Cheat Sheet](http://www.schneems.com/2016/01/25/ruby-debugging-magic-cheat-sheet.html)  
 
 ## PostgreSQL
 [Официальная документация на русском языке](https://postgrespro.ru/docs)  
