@@ -224,3 +224,4 @@ apress-api, apress-clearance, apress-application
 [Hypermedia REST API](https://habrahabr.ru/company/aligntechnology/blog/281206/)    
 [15 тривиальных фактов о правильной работе с протоколом HTTP](https://habrahabr.ru/company/yandex/blog/265569/)     
 [Именование сложных действий в REST API](https://habrahabr.ru/post/251193/)   
+[The Ultimate Guide to API Design](https://blog.qmo.io/ultimate-guide-to-api-design/)   
