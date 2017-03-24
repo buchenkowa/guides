@@ -37,6 +37,8 @@
 [AntiPatterns Basics: Tests](http://code.tutsplus.com/articles/antipatterns-basics-rails-tests--cms-26011)    
 [AntiPatterns Basics: Views](http://code.tutsplus.com/articles/antipatterns-basics-rails-views--cms-25670)    
 
+[50 Most Common Rails Mistakes: The Ruby Way](http://jetruby.com/expertise/common-rails-mistakes-ruby-way/)    
+
 [Ruby/Rails Code Smell Basics](http://code.tutsplus.com/series/ruby-rails-code-smell-basics--cms-960)   
 
 [ПАРУ СЛОВ ПРО ИНТЕРАКТОРЫ В RAILS](https://mkdev.me/posts/paru-slov-pro-interaktory-v-rails)          
