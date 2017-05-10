@@ -43,4 +43,5 @@
 
 [ПАРУ СЛОВ ПРО ИНТЕРАКТОРЫ В RAILS](https://mkdev.me/posts/paru-slov-pro-interaktory-v-rails)          
 [Are service objects enough?](http://blog.ragnarson.com/2016/10/19/are-service-objects-enough.html)          
+[Policy Objects in Ruby on Rails](http://www.eq8.eu/blogs/41-policy-objects-in-ruby-on-rails)          
 
