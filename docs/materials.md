@@ -32,6 +32,9 @@
 [Объясняя необъяснимое 4](https://habrahabr.ru/post/281036/)    
 [Объясняя необъяснимое 5](https://habrahabr.ru/post/282011/)  
 
+[Неклассические приемы
+оптимизации запросов](https://pgday.ru/files/pgmaster14/max.boguk.query.optimization.pdf)  
+
 ## Ruby/Rails
 [AntiPatterns Basics: Models](http://code.tutsplus.com/articles/antipatterns-basics-rails-models--cms-25636)     
 [AntiPatterns Basics: Controllers](http://code.tutsplus.com/articles/antipatterns-basics-rails-controllers--cms-25900)     
