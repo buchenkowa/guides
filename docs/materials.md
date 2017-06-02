@@ -22,7 +22,8 @@
 [Postgres Window Magic](http://momjian.us/main/writings/pgsql/window.pdf)    
 
 ## Databases
-[19 Online Resources for Learning About Database Design Errors](http://www.vertabelo.com/blog/notes-from-the-lab/19-online-resources-for-learning-about-database-design-errors) 
+[19 Online Resources for Learning About Database Design Errors](http://www.vertabelo.com/blog/notes-from-the-lab/19-online-resources-for-learning-about-database-design-errors)     
+[Лекции Технопарка. Базы данных (весна 2017)](https://habrahabr.ru/company/mailru/blog/329928/)    
 
 
 ## Оптимизация запросов PG
