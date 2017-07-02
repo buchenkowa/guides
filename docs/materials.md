@@ -37,6 +37,8 @@
 оптимизации запросов](https://pgday.ru/files/pgmaster14/max.boguk.query.optimization.pdf)  
 
 ## Ruby/Rails
+[RailsCasts](http://railscasts.com/)  
+
 [AntiPatterns Basics: Models](http://code.tutsplus.com/articles/antipatterns-basics-rails-models--cms-25636)     
 [AntiPatterns Basics: Controllers](http://code.tutsplus.com/articles/antipatterns-basics-rails-controllers--cms-25900)     
 [AntiPatterns Basics: Tests](http://code.tutsplus.com/articles/antipatterns-basics-rails-tests--cms-26011)    
