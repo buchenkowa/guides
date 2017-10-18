@@ -2,9 +2,9 @@
 
 > Some software engineering rules:
 
-> No code runs faster than no code.  
-> No code has fewer bugs than no code.  
-> No code uses less memory than no code.  
+> No code runs faster than no code.
+> No code has fewer bugs than no code.
+> No code uses less memory than no code.
 > No code is easier to understand than no code.
 
 - [Работа с исходным кодом и репозиторием проекта](https://github.com/abak-press/guides/tree/master/abak-flow)
@@ -14,6 +14,7 @@
 - [Требования к разрабатываемым гемам](https://github.com/abak-press/guides/tree/master/gems)
 - [Версионирование компонентов](https://github.com/abak-press/guides/tree/master/versioning)
 - [Требования к разработке БД](https://github.com/abak-press/guides/blob/master/database/README.md#Требования-к-разработке-БД)
+- [Правила работы со sphinx](https://github.com/abak-press/guides/blob/master/sphinx/README.md)
 - [Требования к разработке отчетов](https://github.com/abak-press/guides/blob/master/docs/starter-kit/reports.md)
 - [Непрерывная интеграция](https://github.com/abak-press/guides/tree/master/ci)
 - [Сервис поиска по исходным кодам](https://github.com/abak-press/guides/tree/master/services#Сервис-поиска-по-исходным-кодам)
@@ -29,9 +30,9 @@
 https://github.com/thoughtbot/guides
 
 # Обучающие материалы
-- [Обучающие материалы](https://github.com/abak-press/guides/blob/master/docs/materials.md)  
-- [Полезные ресурсы и блоги](https://github.com/abak-press/guides/blob/master/docs/blogs.md)  
+- [Обучающие материалы](https://github.com/abak-press/guides/blob/master/docs/materials.md)
+- [Полезные ресурсы и блоги](https://github.com/abak-press/guides/blob/master/docs/blogs.md)
 
 ## TODO
-Написать про права на гитхабе.  
+Написать про права на гитхабе.
 Перенести все хорошее из конфа.
