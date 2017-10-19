@@ -49,3 +49,4 @@
 # Полезные ссылки  
 [Как писать отличные пулл-реквесты](http://habrahabr.ru/post/248527/)  
 [Как создать идеальный Pull Request](https://habrahabr.ru/company/Voximplant/blog/279703/)   
+[Пулл-реквесты с эмпатией](https://habrahabr.ru/company/mobileup/blog/340456/)   
