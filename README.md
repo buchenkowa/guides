@@ -25,6 +25,7 @@
 - [Рекомендации по написанию RSpec - тестов](http://betterspecs.org/ru/)
 - [Инвайты в чаты](https://conf.railsc.ru/pages/viewpage.action?pageId=27755101)
 - [Workflow решения задач](https://github.com/abak-press/guides/blob/master/docs/starter-kit/01-task-workflow.md)
+- [Работа с проектами через Docker](docker-howto/)
 
 По большинству вопросов мы принимаем правила описанные в гайде:
 https://github.com/thoughtbot/guides
