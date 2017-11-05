@@ -6,9 +6,9 @@
 #                                                                             #
 ###############################################################################
 
-APRESS_GEMS_CREDENTIALS  = $(VALUE_NOT_SET)
+APRESS_GEMS_CREDENTIALS  = not_set
 
-APRESS_DUMPS_CREDENTIALS = $(VALUE_NOT_SET)
+APRESS_DUMPS_CREDENTIALS = not_set
 
 WORKDIR                 := `pwd`
 
@@ -23,18 +23,16 @@ RSA_KEY                  = `echo ~`/.ssh/id_rsa
 #                                                                             #
 ###############################################################################
 
-VERSION                 = 1.0.0
+VERSION                  = 1.1.0
 
-VALUE_NOT_SET           = not_set
+BLOCK_SEPARATOR          = ==============================================================================
 
-BLOCK_SEPARATOR         = ==============================================================================
+STEP_MESSAGE             = "\n$(BLOCK_SEPARATOR)\n %s.\n$(BLOCK_SEPARATOR)\n\n"
 
-STEP_MESSAGE            = "\n$(BLOCK_SEPARATOR)\n %s.\n$(BLOCK_SEPARATOR)\n\n"
+EXPORT_DUMPS_CREDENTIALS = $(if [ ! $(APRESS_DUMPS_CREDENTIALS) = not_set ],\
+                                APRESS_DUMPS_CREDENTIALS=$(APRESS_DUMPS_CREDENTIALS))
 
-CURL_DUMPS_CREDENTIALS  = `if [ ! $(APRESS_DUMPS_CREDENTIALS) = $(VALUE_NOT_SET) ]; then\
-													echo --user $(APRESS_DUMPS_CREDENTIALS); fi;`\
-
-IS_REBOOT_NEEDED        = false
+IS_REBOOT_NEEDED         = false
 
 
 ###############################################################################
@@ -77,9 +75,11 @@ help:
 		\
 		\n\r     $(VERSION) \n\
 		\
+		\n\r     See changelog <https://github.com/abak-press/guides/blob/master/docker-howto/CHANGELOG.md> \n\
+		\
 		\r\n\033[1m REPORTING BUGS: \033[0m \n\
 		\
-		\n\r     Report bugs to <https://github.com/idbolshakov/apress-docker-howto/issues> \n\
+		\n\r     Report bugs to <https://github.com/abak-press/guides/issues> \n\
 		\
 		\r\n\033[1m AUTHOR: \033[0m \n\
 		\
@@ -87,7 +87,7 @@ help:
 		\
 		\r\n\033[1m SEE ALSO: \033[0m \n\
 		\
-		\n\r     Full documentation at: <https://github.com/idbolshakov/apress-docker-howto>\n";
+		\n\r     Full documentation at: <https://github.com/abak-press/guides/tree/master/docker-howto>\n";
 
 
 ###############################################################################
@@ -111,12 +111,12 @@ define deploy_complete_message
 
 	@if [ $(IS_REBOOT_NEEDED) = true ]; then\
 	  printf " System need to reboot. Reboot right now (y/n)? ";\
-		read answer;\
-		if [ $$answer = y ]; then\
-		  sudo reboot;\
-		else\
-			printf " Please reboot your system before using project\n\n";\
-		fi;\
+	  read answer;\
+	  if [ $$answer = y ]; then\
+	    sudo reboot;\
+	  else\
+	    printf " Please reboot your system before using project\n\n";\
+	  fi;\
 	fi;
 endef
 
@@ -181,11 +181,11 @@ dip:
 	@printf $(STEP_MESSAGE) 'BEGIN install dip';
 
 	  @if [ ! $(shell command -v dip 2>/dev/null) ]; then\
-		  curl -L https://github.com/bibendi/dip/releases/download/0.10.0/dip-`uname -s`-`uname -m` > "$(WORKDIR)/dip";\
-		  sudo mv "$(WORKDIR)/dip" /usr/local/bin/dip;\
-		  sudo chmod +x /usr/local/bin/dip;\
+	    curl -L https://github.com/bibendi/dip/releases/download/0.10.0/dip-`uname -s`-`uname -m` > "$(WORKDIR)/dip";\
+	    sudo mv "$(WORKDIR)/dip" /usr/local/bin/dip;\
+	    sudo chmod +x /usr/local/bin/dip;\
 	  else\
-		  echo 'dip is already installed';\
+	    echo 'dip is already installed';\
 	  fi;
 
 	@printf $(STEP_MESSAGE) 'END install dip';
@@ -203,8 +203,8 @@ define clone_project
 	  echo project directory already exists.;\
 	else\
 	  git clone "https://github.com/abak-press/$(1)" "$(WORKDIR)/$(1)";\
-		cd "$(WORKDIR)/$(1)";\
-		git remote rename origin upstream;\
+	  cd "$(WORKDIR)/$(1)";\
+	  git remote rename origin upstream;\
 	fi;
 
 	@printf $(STEP_MESSAGE) 'END clone $(1)';
@@ -226,7 +226,15 @@ git:
 
 	@printf $(STEP_MESSAGE) 'END install git';
 
-
+##
+# download_dumps function
+#
+# $1 - project name
+# $2 - download dumps script name
+##
+define download_dumps
+	@sg docker -c 'cd "$(WORKDIR)/$(1)"; $(EXPORT_DUMPS_CREDENTIALS) ./docker/bin/$(2)'
+endef
 
 ##
 # download blizko dumps
@@ -234,12 +242,7 @@ git:
 blizko-dumps:
 	@printf $(STEP_MESSAGE) 'BEGIN download blizko dumps';
 
-	  @curl ${CURL_DUMPS_CREDENTIALS} https://ekb.dumps.railsc.ru/blizko/default/blizko_orders_test.backup-latest.sql.bz2\
-			| bzcat | gzip -c > "$(WORKDIR)/blizko/docker/configs/dumps/development/orders_pg/10-orders.sql.gz";\
-		curl ${CURL_DUMPS_CREDENTIALS} https://ekb.dumps.railsc.ru/blizko/default/blizko_test.backup-latest.sql.bz2\
-			| bzcat | gzip -c > "$(WORKDIR)/blizko/docker/configs/dumps/development/pg/10-common.sql.gz";\
-		curl ${CURL_DUMPS_CREDENTIALS} https://ekb.dumps.railsc.ru/blizko/default/blizko_stat_test.backup-latest.sql.bz2\
-			| bzcat | gzip -c > "$(WORKDIR)/blizko/docker/configs/dumps/development/stat_pg/10-statistics.sql.gz";
+	  $(call download_dumps,blizko,restore)
 
 	@printf $(STEP_MESSAGE) 'END download blizko dumps';
 
@@ -251,12 +254,7 @@ blizko-dumps:
 pulscen-dumps:
 	@printf $(STEP_MESSAGE) 'BEGIN download pulscen dumps';
 
-		@curl ${CURL_DUMPS_CREDENTIALS} https://ekb.dumps.railsc.ru/pulscen/default/cosmos_test.backup-latest.sql.bz2\
-		  | bzcat | gzip -c > "$(WORKDIR)/pulscen/docker/configs/dumps/development/orders_pg/orders.sql.gz";\
-		curl ${CURL_DUMPS_CREDENTIALS} https://ekb.dumps.railsc.ru/pulscen/default/pulscen_test.backup-latest.sql.bz2\
-		  | bzcat | gzip -c > "$(WORKDIR)/pulscen/docker/configs/dumps/development/pg/pulscen.sql.gz";\
-		curl ${CURL_DUMPS_CREDENTIALS} https://ekb.dumps.railsc.ru/pulscen/default/pulscen_stat.backup-latest.sql.bz2\
-		  | bzcat | gzip -c > "$(WORKDIR)/pulscen/docker/configs/dumps/development/stat_pg/stats.sql.gz";
+	  $(call download_dumps,pulscen,restore_dumps)
 
 	@printf $(STEP_MESSAGE) 'END download pulscen dumps';
 
@@ -268,8 +266,7 @@ pulscen-dumps:
 lookmart-dumps:
 	@printf $(STEP_MESSAGE) 'BEGIN download lookmart dumps';
 
-		@curl ${CURL_DUMPS_CREDENTIALS} https://ekb.dumps.railsc.ru/lookmart/development/lookmart.sql.gz\
-		  > "$(WORKDIR)/lookmart/docker/configs/dumps/development/pg/lookmart.sql.gz";
+	  $(call download_dumps,lookmart,restore_dumps)
 
 	@printf $(STEP_MESSAGE) 'END download lookmart dumps';
 
@@ -281,23 +278,23 @@ lookmart-dumps:
 ssh:
 	@printf $(STEP_MESSAGE) 'BEGIN init ssh agent';
 
-		@printf\
-			"ssh agent expecting generated public/private rsa key pair ($(RSA_KEY) & $(RSA_KEY).pub).\n\
-			\rPublic part of this rsa key should be added to your github account. \n\
-			\rIf you don't know how did this, please read: \n\
-			\r<https://help.github.com/articles/adding-a-new-ssh-key-to-your-github-account/>\n\n\
-			\rGenerate new public/private rsa key pair ($(RSA_KEY) & $(RSA_KEY).pub) (y/n)? ";\
-		read answer;\
-		if [ $$answer = y ]; then\
-		  ssh-keygen -f "$(RSA_KEY)" -t rsa;\
-		else\
-			printf "\nnew public/private rsa key pair doesn't generated\n";\
-		fi;\
-		printf\
-		  "\nPlease make sure, that public part of rsa ($(RSA_KEY).pub) \n\
-			\radded to your github account and then press ENTER...";\
-		read answer; printf "\n";\
-		sg docker -c 'dip ssh add -k "$(RSA_KEY)"' 2>&1 | tee /dev/null;
+	  @printf\
+	    "ssh agent expecting generated public/private rsa key pair ($(RSA_KEY) & $(RSA_KEY).pub).\n\
+	    \rPublic part of this rsa key should be added to your github account. \n\
+	    \rIf you don't know how did this, please read: \n\
+	    \r<https://help.github.com/articles/adding-a-new-ssh-key-to-your-github-account/>\n\n\
+	    \rGenerate new public/private rsa key pair ($(RSA_KEY) & $(RSA_KEY).pub) (y/n)? ";\
+	  read answer;\
+	  if [ $$answer = y ]; then\
+	    ssh-keygen -f "$(RSA_KEY)" -t rsa;\
+	  else\
+	    printf "\nnew public/private rsa key pair doesn't generated\n";\
+	  fi;\
+	  printf\
+	    "\nPlease make sure, that public part of rsa ($(RSA_KEY).pub) \n\
+	    \radded to your github account and then press ENTER...";\
+	  read answer; printf "\n";\
+	  sg docker -c 'dip ssh add -k "$(RSA_KEY)"' 2>&1 | tee /dev/null;
 
 	@printf $(STEP_MESSAGE) 'END init ssh agent';
 
@@ -309,12 +306,12 @@ ssh:
 dns:
 	@printf $(STEP_MESSAGE) 'BEGIN init dns server';
 
-		@sg docker -c 'dip dns up' 2>&1 | tee /dev/null;\
-		dnsdock_port=`sg docker -c 'docker port dnsdock'`;\
-		without_prefix=`echo $${dnsdock_port#'53/udp -> '}`;\
-		dnsdock_ip=`echo $${without_prefix%':53'}`;\
-		echo server=/docker/$$dnsdock_ip | sudo tee -a /etc/NetworkManager/dnsmasq.d/dnsmasq.conf;\
-		sudo service network-manager restart;
+	  @sg docker -c 'dip dns up' 2>&1 | tee /dev/null;\
+	  dnsdock_port=`sg docker -c 'docker port dnsdock'`;\
+	  without_prefix=`echo $${dnsdock_port#'53/udp -> '}`;\
+	  dnsdock_ip=`echo $${without_prefix%':53'}`;\
+	  echo server=/docker/$$dnsdock_ip | sudo tee -a /etc/NetworkManager/dnsmasq.d/dnsmasq.conf;\
+	  sudo service network-manager restart;
 
 	@printf $(STEP_MESSAGE) 'END init dns server';
 
@@ -330,10 +327,10 @@ define provision
 
 	  @cd "$(WORKDIR)/$(1)";\
 	  sg docker -c 'dip compose down';\
-	  if [ ! $(APRESS_GEMS_CREDENTIALS) = $(VALUE_NOT_SET) ]; then\
-	  	export APRESS_GEMS_CREDENTIALS=$(APRESS_GEMS_CREDENTIALS);\
-		fi;\
-		sg docker -c 'dip provision';
+	  if [ ! $(APRESS_GEMS_CREDENTIALS) = not_set ]; then\
+	    export APRESS_GEMS_CREDENTIALS=$(APRESS_GEMS_CREDENTIALS);\
+	  fi;\
+	  sg docker -c 'dip provision';
 
 	@printf $(STEP_MESSAGE) 'END $(1) provision';
 endef
