@@ -23,13 +23,13 @@ RSA_KEY                  = `echo ~`/.ssh/id_rsa
 #                                                                             #
 ###############################################################################
 
-VERSION                  = 1.1.0
+VERSION                  = 1.1.1
 
 BLOCK_SEPARATOR          = ==============================================================================
 
 STEP_MESSAGE             = "\n$(BLOCK_SEPARATOR)\n %s.\n$(BLOCK_SEPARATOR)\n\n"
 
-EXPORT_DUMPS_CREDENTIALS = $(if [ ! $(APRESS_DUMPS_CREDENTIALS) = not_set ],\
+EXPORT_DUMPS_CREDENTIALS = $(if $(shell [ ! $(APRESS_DUMPS_CREDENTIALS) = not_set ] && echo true),\
                                 APRESS_DUMPS_CREDENTIALS=$(APRESS_DUMPS_CREDENTIALS))
 
 IS_REBOOT_NEEDED         = false

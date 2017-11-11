@@ -2,6 +2,11 @@
 All notable changes to `makefile` will be documented in this file
 
 
+## [1.1.1] - 10.11.2017
+### Fixed
+- APRESS_DUMPS_CREDENTIALS variable pass into restore_dumps script only if need
+
+
 ## [1.1.0] - 04.11.2017
 ### Added
 - this changelog file
