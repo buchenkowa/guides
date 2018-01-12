@@ -65,7 +65,7 @@
   Поэтому установку `dip` можно выполнить следующим способом:
 
   ```bash
-    curl -L https://github.com/bibendi/dip/releases/download/0.10.0/dip-`uname -s`-`uname -m` > ~/dip
+    curl -L https://github.com/bibendi/dip/releases/download/1.0.2/dip-`uname -s`-`uname -m` > ~/dip
     sudo mv ~/dip /usr/local/bin/dip
     sudo chmod +x /usr/local/bin/dip
   ```
