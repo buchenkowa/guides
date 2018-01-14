@@ -3,7 +3,14 @@ FAQ
 
 * [Как устанавливать гемы не из сети Абака?](#Как-устанавливать-гемы-не-из-сети-Абака)
 
-* [При установке гемов появляется ошибка `Permission denied (publickey)..`](#При-установке-гемов-появляется-ошибка-permission-denied-publickey)
+* [Ошибки при установке гемов](#Ошибки-при-установке-гемов)
+
+  - [`Permission denied (publickey)...`][0]
+
+  - [`Bundler::Fetcher::CertificateFailureError Could not verify the SSL certificate for https://rails-assets.org/.`][1]
+
+[0]: #permission-denied-publickey
+[1]: #bundlerfetchercertificatefailureerror-could-not-verify-the-ssl-certificate-for-httpsrails-assetsorg
 
 Как устанавливать гемы не из сети Абака?
 ----------------------------------------
@@ -28,10 +35,10 @@ FAQ
     ```
 
 
+Ошибки при установке гемов
+--------------------------
 
-
-При установке гемов появляется ошибка `Permission denied (publickey)..`
------------------------------------------------------------------------
+### `Permission denied (publickey)...`
 
 1. Убедиться, что в `~/.ssh/` создана пара rsa ключа, приватный (id_rsa) и публичный (id_rsa.pub)
 
@@ -44,3 +51,11 @@ FAQ
       dip ssh down
       dip ssh up
     ```
+
+### `Bundler::Fetcher::CertificateFailureError Could not verify the SSL certificate for https://rails-assets.org/.`
+
+Такое периодически происходит, когда заканчивается сертификат у `rails-assets.org`. В данной ситуации нужно просто
+подождать, когда сертификат обновят. На это время в гемфайле нужно заменить ссылку на http://insecure.rails-assets.org
+и сборка пройдет успешно.
+
+последний раз такая проблема была в декабре 2017: https://github.com/tenex/rails-assets/issues/416

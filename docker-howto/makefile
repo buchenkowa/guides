@@ -23,7 +23,7 @@ RSA_KEY                  = `echo ~`/.ssh/id_rsa
 #                                                                             #
 ###############################################################################
 
-VERSION                  = 1.1.1
+VERSION                  = 1.2.0
 
 BLOCK_SEPARATOR          = ==============================================================================
 
@@ -181,7 +181,7 @@ dip:
 	@printf $(STEP_MESSAGE) 'BEGIN install dip';
 
 	  @if [ ! $(shell command -v dip 2>/dev/null) ]; then\
-	    curl -L https://github.com/bibendi/dip/releases/download/0.10.0/dip-`uname -s`-`uname -m` > "$(WORKDIR)/dip";\
+	    curl -L https://github.com/bibendi/dip/releases/download/1.0.2/dip-`uname -s`-`uname -m` > "$(WORKDIR)/dip";\
 	    sudo mv "$(WORKDIR)/dip" /usr/local/bin/dip;\
 	    sudo chmod +x /usr/local/bin/dip;\
 	  else\
@@ -294,6 +294,7 @@ ssh:
 	    "\nPlease make sure, that public part of rsa ($(RSA_KEY).pub) \n\
 	    \radded to your github account and then press ENTER...";\
 	  read answer; printf "\n";\
+	  sg docker -c 'dip ssh down' 2>&1 | tee /dev/null;
 	  sg docker -c 'dip ssh add -k "$(RSA_KEY)"' 2>&1 | tee /dev/null;
 
 	@printf $(STEP_MESSAGE) 'END init ssh agent';
