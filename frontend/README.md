@@ -33,6 +33,7 @@
 ## [Оптимизация производительности](performance/README.md)
 
 * [Код сторонних сервисов на проектах](performance/external-code/README.md)
+* [Подключение неиспользуемых js-модулей](performance/unused_modules/README.md)
 
 
 ## [Общие руководства](common/README.md)
