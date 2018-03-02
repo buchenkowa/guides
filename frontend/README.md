@@ -17,6 +17,7 @@
 ## [Техпроцесс](workflow/README.md)
 
 * [Код ревью](workflow/code-review/README.md)
+* [Разработка на основе документации](workflow/document-driven-development/README.md)
 
 
 ## [Архитектурные соглашения](architecture/README.md)
