@@ -15,7 +15,7 @@
 Аутентификация осуществляется с помощью [HMAC](https://tools.ietf.org/html/rfc2104) механизма. Что это значит в двух словах.
 На Клиенте и на Сервере есть одинаковый секретный ключ, которые они не передают по сети.
 С этого ключа Клиент подписывает свой запрос, а Сервер проверяет эту подпись.
-Клиент передаёт на Сервер только свой access_id. 
+Клиент передаёт на Сервер только свой access_id.
 На Сервере хранится таблица соответствий access_id => secret_token.
 
 http://www.thebuzzmedia.com/designing-a-secure-rest-api-without-oauth-authentication/
@@ -53,20 +53,19 @@ http://www.thebuzzmedia.com/designing-a-secure-rest-api-without-oauth-authentica
 ## Формат ответа
 
 - Ответ формируется в формате JSON
-- В ответе должен всегда присутствовать root элемент. примеры:
+- В ответе не должно быть root элемента. Примеры:
 ```json
 {
-  rubric: {id: 123}
+  id: 123
 }
 
-{
-  rubrics: [
-    {id: 123},
-    {id: 124}
-  ]
-}
+[
+  {id: 123},
+  {id: 124}
+]
 ```
-- постраничная наваигация должна возвращаться в заголовках ответа `X-Total-Count X-Total-Pages`
+
+- постраничная навигация должна возвращаться в заголовках ответа `X-Total-Count X-Total-Pages`
 
 ### Соглашения по формату ответа
 
@@ -79,19 +78,19 @@ http://www.thebuzzmedia.com/designing-a-secure-rest-api-without-oauth-authentica
 
 так правильно
 ```
-order: { ...
+{ ...
   budget: null,
   rubric_id: null,
   ....
-  }
-```  
+}
+```
 так не правильно
 ```
-order: { ...
-  // нет budget 
+{ ...
+  // нет budget
   // нет rubric_id
   ...
-  }
+}
 ```
 
 ## Разработка и отладка
@@ -146,7 +145,7 @@ updated_at - datetime
   }
   ```
 
-### Dependencies 
+### Dependencies
 api-auth, jbuilder
 
 
@@ -166,7 +165,7 @@ api-auth, jbuilder
 Авторизация - это определение роли пользователя и его доступных прав.
 Авторизация будет работать стандартная портальная.
 
-Помимо 
+Помимо
 
 ### DB
 Добавляет в таблицу `api_clients` столбец `user_id: :integer`
@@ -192,7 +191,7 @@ api-auth, jbuilder
 
 Т.е. при работе с каждым экшеном API будет возможность авторизации через access_id и session_id.
 
-### Dependencies 
+### Dependencies
 apress-api, apress-clearance, apress-application
 
 # Общая схема работы
@@ -218,10 +217,10 @@ apress-api, apress-clearance, apress-application
 Какое-то время мобильному приложению придется работать с двуми API параллельно. Новый функционал будем реализовывать в новом API, старый будет доживать в старом. Постепенно, старое API удалим.
 
 # Дополнительные ресурсы
-[Изучаем REST: Руководство по созданию RESTful сервиса](http://www.restapitutorial.ru/)   
-[JSON API](http://jsonapi.org/)  
-[GitHub API](https://developer.github.com/v3/)  
-[Hypermedia REST API](https://habrahabr.ru/company/aligntechnology/blog/281206/)    
-[15 тривиальных фактов о правильной работе с протоколом HTTP](https://habrahabr.ru/company/yandex/blog/265569/)     
-[Именование сложных действий в REST API](https://habrahabr.ru/post/251193/)   
-[The Ultimate Guide to API Design](https://blog.qmo.io/ultimate-guide-to-api-design/)   
+[Изучаем REST: Руководство по созданию RESTful сервиса](http://www.restapitutorial.ru/)
+[JSON API](http://jsonapi.org/)
+[GitHub API](https://developer.github.com/v3/)
+[Hypermedia REST API](https://habrahabr.ru/company/aligntechnology/blog/281206/)
+[15 тривиальных фактов о правильной работе с протоколом HTTP](https://habrahabr.ru/company/yandex/blog/265569/)
+[Именование сложных действий в REST API](https://habrahabr.ru/post/251193/)
+[The Ultimate Guide to API Design](https://blog.qmo.io/ultimate-guide-to-api-design/)
