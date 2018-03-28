@@ -18,7 +18,7 @@
 
 * [Код ревью](workflow/code-review/README.md)
 * [Разработка на основе документации](workflow/document-driven-development/README.md)
-
+* [Изменение общей функциональности](workflow/common-functionality/README.md)
 
 ## [Архитектурные соглашения](architecture/README.md)
 
