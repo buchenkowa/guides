@@ -41,4 +41,9 @@
 
 * [Правила написания универсальной функциональности](common/universal-code-rules/README.md)
 
+
+## [Реакт](react/README.md)
+
+* [Стайлгайды](react/style-guides/README.md)
+
 ## [Обучающие курсы](education/README.md)
