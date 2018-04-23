@@ -40,6 +40,7 @@
 ## [Общие руководства](common/README.md)
 
 * [Правила написания универсальной функциональности](common/universal-code-rules/README.md)
+* [Standalone-файлы](common/standalone/README.md)
 
 
 ## [Реакт](react/README.md)
