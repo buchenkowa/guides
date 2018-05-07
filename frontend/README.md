@@ -28,9 +28,6 @@
 
 ## [Тестирование](tests/README.md)
 
-* [Юнит-тесты для legacy js](tests/legacy-unit-tests/README.md)
-* [Юнит-тесты для react](tests/react-unit-tests/README.md)
-
 
 ## [Оптимизация производительности](performance/README.md)
 
@@ -47,6 +44,8 @@
 
 ## [Реакт](react/README.md)
 
+* [Архитектура](react/architecture/README.md)
 * [Стайлгайды](react/style-guides/README.md)
+* [Тестирование](react/tests/README.md)
 
 ## [Обучающие курсы](education/README.md)
