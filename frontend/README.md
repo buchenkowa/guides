@@ -40,6 +40,7 @@
 * [Правила написания универсальной функциональности](common/universal-code-rules/README.md)
 * [Standalone-файлы](common/standalone/README.md)
 * [Useful-классы](common/useful-classes/README.md)
+* [Добавление сторонних зависимостей](common/third-party-dependency/README.md)
 
 
 ## [Реакт](react/README.md)
