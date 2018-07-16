@@ -49,4 +49,8 @@
 * [Стайлгайды](react/style-guides/README.md)
 * [Тестирование](react/tests/README.md)
 
+## [Node.js, yarn, webpack](modern-front/README.md)
+
+* [Интеграция проектов apress с node.js и webpack](modern-front/README.md)
+
 ## [Обучающие курсы](education/README.md)
