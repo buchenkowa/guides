@@ -15,6 +15,8 @@
 [«Программист-прагматик. Путь от подмастерья к мастеру»: коротко о главном (часть первая)](https://habrahabr.ru/company/everydaytools/blog/348116/)  
 [«Программист-прагматик. Путь от подмастерья к мастеру»: коротко о главном (часть вторая)](https://habrahabr.ru/company/everydaytools/blog/348932/)  
 
+[Курс «Языки веб-программирования» (на основе Ruby) от МГТУ им. Н. Э. Баумана](https://habr.com/company/mailru/blog/419765/)  
+
 ## Ruby
 [Ruby Tricks, Idiomatic Ruby, Refactorings and Best Practices](https://github.com/franzejr/best-ruby)  
 [Ruby Debugging Magic Cheat Sheet](http://www.schneems.com/2016/01/25/ruby-debugging-magic-cheat-sheet.html)  
