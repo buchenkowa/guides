@@ -59,3 +59,5 @@
 [Interactors in Ruby — easy as cake, simple as pie](https://goiabada.blog/interactors-in-ruby-easy-as-cake-simple-as-pie-33f66de2eb78) .  
 [7 Design Patterns to Refactor MVC Components in Rails](https://www.sitepoint.com/7-design-patterns-to-refactor-mvc-components-in-rails)          
 
+[Using Pundit for authorization in Rails - recipes and best practices](https://crypt.codemancers.com/posts/2018-07-29-leveraging-pundit/)
+
