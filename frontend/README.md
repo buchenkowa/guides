@@ -24,6 +24,7 @@
 ## [Архитектурные соглашения](architecture/README.md)
 
 * [Правила оформления Front-end в гемах и проектах](architecture/gems_n_projects/README.md)
+* [Правила организации sprockets-ассетов в пекеджи](architecture/sprockets-assets-packages/README.md)
 
 
 ## [Тестирование](tests/README.md)
