@@ -17,7 +17,7 @@
 
 ## Список сервисных групп и репозиториев, за которые они отвечают
 
-* Коммуникации
+* Коммуникации [не активна. За гемы отвечает Большаков Иван]
 
   - `apress-company_reviews`
   - `apress-company_reviews-orders`
@@ -42,6 +42,8 @@
   - `apress-companies-currency_rates`
   - `apress-product_groups-front`
   - `apress-treeview-assets`
+  - `apress-online_stores`
+  - `apress-rubric_binding`
 
 * Заказы
 
@@ -54,7 +56,7 @@
   - `cosmos-treasury`
   - `cosmos-client`
 
-* СК
+* СК [не активна. За гемы отвечает Лёвушкина Марина]
 
   - `apress-companies`
   - `apress-companies-templates`
