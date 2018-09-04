@@ -56,8 +56,10 @@
 [ПАРУ СЛОВ ПРО ИНТЕРАКТОРЫ В RAILS](https://mkdev.me/posts/paru-slov-pro-interaktory-v-rails)          
 [Are service objects enough?](http://blog.ragnarson.com/2016/10/19/are-service-objects-enough.html)          
 [Policy Objects in Ruby on Rails](http://www.eq8.eu/blogs/41-policy-objects-in-ruby-on-rails)  
-[Interactors in Ruby — easy as cake, simple as pie](https://goiabada.blog/interactors-in-ruby-easy-as-cake-simple-as-pie-33f66de2eb78) .  
+[Interactors in Ruby — easy as cake, simple as pie](https://goiabada.blog/interactors-in-ruby-easy-as-cake-simple-as-pie-33f66de2eb78)    
+[Validators for Interactors](https://medium.com/reflektive-engineering/validators-for-interactors-a0632494e3d5)   
 [7 Design Patterns to Refactor MVC Components in Rails](https://www.sitepoint.com/7-design-patterns-to-refactor-mvc-components-in-rails)          
+
 
 [Using Pundit for authorization in Rails - recipes and best practices](https://crypt.codemancers.com/posts/2018-07-29-leveraging-pundit/)
 
