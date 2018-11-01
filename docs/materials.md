@@ -25,6 +25,8 @@
 [Официальная документация на русском языке](https://postgrespro.ru/docs)  
 [Работа с PostgreSQL: настройка и масштабирование](http://postgresql.leopard.in.ua/html)    
 [Postgres Window Magic](http://momjian.us/main/writings/pgsql/window.pdf)    
+[Книги от Postgres Professional](https://postgrespro.ru/education/books)    
+
 
 ## Databases
 [19 Online Resources for Learning About Database Design Errors](http://www.vertabelo.com/blog/notes-from-the-lab/19-online-resources-for-learning-about-database-design-errors)     
