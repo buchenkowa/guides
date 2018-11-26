@@ -7,6 +7,8 @@
 > No code uses less memory than no code.
 > No code is easier to understand than no code.
 
+[Манифест жёсткого программиста](https://habr.com/post/431064/)
+
 - [Работа с исходным кодом и репозиторием проекта](https://github.com/abak-press/guides/tree/master/abak-flow)
 - [Оформление кода](https://github.com/abak-press/guides/tree/master/style)
 - [Требования к оформлению PR](https://github.com/abak-press/guides/tree/master/code-review#Требования-к-оформлению-pr)
