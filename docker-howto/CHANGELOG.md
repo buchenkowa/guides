@@ -1,6 +1,14 @@
 # makefile changelog
 All notable changes to `makefile` will be documented in this file
 
+## [1.3.0] - 10.02.2019
+## Added
+- ubuntu 14.04 support
+- ubuntu 18.02 support
+### Changed
+- update dip version (2.0.0) in makefile and ubuntu-deploy manual
+- add nginx proxy server init
+
 ## [1.2.0] - 13.01.2018
 ### Added
 -  rails-assets.org certificat fauilure issue in docs/FAQ.md
