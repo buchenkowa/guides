@@ -117,6 +117,25 @@ TL;DR
 настройками, например, `config/webpack/development.js`. Файл, содержащий общие настройки для всех окружений -
 `config/webpack/environment.js`. Entrypoints хранятся в директории frontend/packs.
 
+Для более удобной отладки можно использовать гибкую настройку
+[source-maps](https://blog.teamtreehouse.com/introduction-source-maps) опцией `devtool`. Она будет влять на то,
+как код отображается в браузере при отладке. Так, со значением `eval` будет показан код сгенерированный вебпаком, а при
+`eval-source-map` - исходный. Для использования `devtool` в development окружении, надо положить нужное значение в
+конфиг (`config/webpack/development.js`). Возможные значения `devtool` и их описание можной найти в
+[документации webpack](https://webpack.js.org/configuration/devtool/#devtool).
+Там же есть [рекомендации по использованию опции для отладки](https://webpack.js.org/configuration/devtool/#development).
+
+Пример `config/webpack/development.js` с опцией `devtool`
+
+```
+const environment = require('./environment');
+
+const config = environment.toWebpackConfig();
+config.devtool = 'eval-source-map';
+module.exports = config;
+```
+
+`devtool` назначается после вызова `toWebpackConfig()`.
 
 #### Интеграция с RoR
 
@@ -167,7 +186,7 @@ TL;DR
        ```
        import '@apress/apress-eti/build/assets-eti.js';
        ```
-       Этот entry-points (`frontend/packs/apress-eti/assets/common.js`) указываем в геме для подключения: 
+       Этот entry-points (`frontend/packs/apress-eti/assets/common.js`) указываем в геме для подключения:
        ```
        = javascript_pack_tag 'apress-eti/assets/common', defer: true
        ```
