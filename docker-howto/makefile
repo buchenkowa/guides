@@ -23,7 +23,7 @@ RSA_KEY                  = `echo ~`/.ssh/id_rsa
 #                                                                             #
 ###############################################################################
 
-VERSION                  = 1.2.0
+VERSION                  = 1.3.0
 
 BLOCK_SEPARATOR          = ==============================================================================
 
@@ -120,13 +120,13 @@ define deploy_complete_message
 	fi;
 endef
 
-blizko: docker docker-compose dip blizko-clone blizko-dumps ssh dns blizko-provision
+blizko: docker docker-compose dip blizko-clone blizko-dumps ssh dns nginx blizko-provision
 	$(call deploy_complete_message,blizko,https://github.com/abak-press/blizko/blob/develop/docker/README.md#webric)
 
-pulscen: docker docker-compose dip pulscen-clone pulscen-dumps ssh dns pulscen-provision
+pulscen: docker docker-compose dip pulscen-clone pulscen-dumps ssh dns nginx pulscen-provision
 	$(call deploy_complete_message,pulscen,https://github.com/abak-press/pulscen/blob/develop/docker/README.md#webric)
 
-lookmart: docker docker-compose dip lookmart-clone lookmart-dumps ssh dns lookmart-provision
+lookmart: docker docker-compose dip lookmart-clone lookmart-dumps ssh dns nginx lookmart-provision
 	$(call deploy_complete_message,lookmart,https://github.com/abak-press/lookmart/blob/develop/docker/README.md#webric)
 
 ###############################################################################
@@ -166,7 +166,8 @@ docker:
 docker-compose:
 	@printf $(STEP_MESSAGE) 'BEGIN install docker-compose';
 
-	  @sudo apt-get install docker-compose;
+	  @sudo curl -L "https://github.com/docker/compose/releases/download/1.23.2/docker-compose-$$(uname -s)-$$(uname -m)" -o /usr/local/bin/docker-compose;
+	  @sudo chmod +x /usr/local/bin/docker-compose;
 
 	@printf $(STEP_MESSAGE) 'END install docker-compose';
 
@@ -181,7 +182,8 @@ dip:
 	@printf $(STEP_MESSAGE) 'BEGIN install dip';
 
 	  @if [ ! $(shell command -v dip 2>/dev/null) ]; then\
-	    curl -L https://github.com/bibendi/dip/releases/download/1.0.2/dip-`uname -s`-`uname -m` > "$(WORKDIR)/dip";\
+	    sudo apt-get install libyaml-0-2 2>/dev/null;\
+	    curl -L https://github.com/bibendi/dip/releases/download/2.0.0/dip-`uname -s`-`uname -m` > "$(WORKDIR)/dip";\
 	    sudo mv "$(WORKDIR)/dip" /usr/local/bin/dip;\
 	    sudo chmod +x /usr/local/bin/dip;\
 	  else\
@@ -308,14 +310,22 @@ dns:
 	@printf $(STEP_MESSAGE) 'BEGIN init dns server';
 
 	  @sg docker -c 'dip dns up' 2>&1 | tee /dev/null;\
-	  dnsdock_port=`sg docker -c 'docker port dnsdock'`;\
-	  without_prefix=`echo $${dnsdock_port#'53/udp -> '}`;\
-	  dnsdock_ip=`echo $${without_prefix%':53'}`;\
-	  echo server=/docker/$$dnsdock_ip | sudo tee -a /etc/NetworkManager/dnsmasq.d/dnsmasq.conf;\
+	  echo address=/docker/127.0.0.1 | sudo tee -a /etc/NetworkManager/dnsmasq.d/dnsmasq.conf;\
+	  echo export DOCKER_TLD=localhost | tee -a ~/.bashrc;\
 	  sudo service network-manager restart;
 
 	@printf $(STEP_MESSAGE) 'END init dns server';
 
+
+##
+# start nginx server container
+##
+nginx:
+	@printf $(STEP_MESSAGE) 'BEGIN init nginx server';
+
+	  @sg docker -c 'dip nginx up' 2>&1 | tee /dev/null;
+
+	@printf $(STEP_MESSAGE) 'END init nginx server';
 
 
 ##

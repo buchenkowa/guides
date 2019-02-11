@@ -17,7 +17,9 @@
 
 7. [Запуск dns сервера](#7-Запуск-dns-сервера)
 
-8. [Первичная инициализация проекта](#8-Первичная-инициализация-проекта)
+8. [Запуск nginx proxy](#7-Запуск-nginx-proxy)
+
+9. [Первичная инициализация проекта](#8-Первичная-инициализация-проекта)
 
 
 1\. Установка docker
@@ -48,7 +50,8 @@
 После успешной установки docker-ce, необходимо установить docker-compose:
 
 ```bash
-  sudo apt-get install docker-compose
+  sudo curl -L "https://github.com/docker/compose/releases/download/1.23.2/docker-compose-$$(uname -s)-$$(uname -m)" -o /usr/local/bin/docker-compose;
+  sudo chmod +x /usr/local/bin/docker-compose;
 ```
 
 
@@ -65,7 +68,8 @@
   Поэтому установку `dip` можно выполнить следующим способом:
 
   ```bash
-    curl -L https://github.com/bibendi/dip/releases/download/1.0.2/dip-`uname -s`-`uname -m` > ~/dip
+	  sudo apt-get install libyaml-0-2 2>/dev/null
+    curl -L https://github.com/bibendi/dip/releases/download/2.0.0/dip-`uname -s`-`uname -m` > ~/dip
     sudo mv ~/dip /usr/local/bin/dip
     sudo chmod +x /usr/local/bin/dip
   ```
@@ -157,15 +161,22 @@
 
 ```bash
   dip dns up
-  dnsdock_port=`docker port dnsdock`;\
-  without_prefix=`echo ${dnsdock_port#'53/udp -> '}`;\
-  dnsdock_ip=`echo ${without_prefix%':53'}`;\
-  echo server=/docker/$dnsdock_ip | sudo tee -a /etc/NetworkManager/dnsmasq.d/dnsmasq.conf
-  sudo service network-manager restart
+  echo address=/docker/127.0.0.1 | sudo tee -a /etc/NetworkManager/dnsmasq.d/dnsmasq.conf;\
+  echo export DOCKER_TLD=localhost | tee -a ~/.bashrc;\
+  sudo service network-manager restart;
+```
+
+8\. Запуск nginx proxy
+----------------------
+
+Для запуска nginx proxy сервера, инициализации и запуска с нужными настройками:
+
+```bash
+  dip nginx up;
 ```
 
 
-8\. Первичная инициализация проекта
+9\. Первичная инициализация проекта
 ----------------------------------
 
 Для первичной инициализации, необходимо из корневой директории проекта выполнить:
