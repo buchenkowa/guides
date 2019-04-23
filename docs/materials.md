@@ -66,3 +66,13 @@
 
 [Using Pundit for authorization in Rails - recipes and best practices](https://crypt.codemancers.com/posts/2018-07-29-leveraging-pundit/)
 
+
+Finders
+
+https://spin.atomicobject.com/2008/06/16/finder-objects-in-rails/
+
+http://vaidehijoshi.github.io/blog/2015/10/27/digging-into-the-finder-object-pattern/
+
+https://twin.github.io/finder-objects/
+
+[Гем для создания продвинутых файндеров](https://github.com/abak-press/findit)
